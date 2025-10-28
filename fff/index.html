@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>THE DISCIPLINE PACK</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0a0000;
+      --fg:#ffffff;
+      --muted:rgba(255,255,255,.7);
+      --red:#ff2b2b;
+      --glass:rgba(255,255,255,.06);
+      --glass-bd:rgba(255,255,255,.14);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      background:var(--bg); color:var(--fg);
+      font-family:"Cairo",system-ui,-apple-system,Segoe UI,Roboto;
+      text-align:center;
+    }
+    .wrap{
+      max-width: 720px;
+      margin: 44px auto;
+      padding: 0 20px 60px; /* bottom padding so nothing hugs the edge */
+    }
+
+    .title{
+      font-weight:900; font-size:28px; line-height:1.05;
+      color:var(--red);
+      letter-spacing:.4px;
+      margin-bottom: 14px;
+      text-transform:uppercase;
+    }
+
+    /* Header line with counter */
+    .subline{
+      font-weight:900;
+      font-size:22px;
+      color:#fff;
+      text-transform:uppercase;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:10px;
+      letter-spacing:.5px;
+      margin-bottom: 26px;
+    }
+    .count{
+      color:#ff3b3b;
+      text-shadow:
+        0 0 6px rgba(255,0,0,.9),
+        0 0 16px rgba(255,0,0,.7),
+        0 0 26px rgba(255,0,0,.5);
+      transition: transform .15s ease;
+    }
+    .count.counting{ animation:pulse-red .8s ease-in-out infinite; }
+    @keyframes pulse-red{
+      0%,100%{ transform: scale(1); text-shadow:0 0 6px rgba(255,0,0,.9),0 0 16px rgba(255,0,0,.7),0 0 26px rgba(255,0,0,.5);}
+      50%{ transform: scale(1.08); text-shadow:0 0 12px rgba(255,60,60,1),0 0 30px rgba(255,0,0,.85),0 0 48px rgba(255,0,0,.7);}
+    }
+    .text{
+      background: linear-gradient(90deg,#fff,#ffd6d6,#ffffff);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      text-shadow:0 0 10px rgba(255,180,180,.22);
+      animation: glowSoft 2.6s ease-in-out infinite alternate;
+    }
+    @keyframes glowSoft{ 0%{filter:brightness(1);} 50%{filter:brightness(1.35);} 100%{filter:brightness(1);} }
+
+    .shot-wrap{
+      position:relative;
+      width:min(100%,640px);
+      margin: 26px auto 22px;
+    }
+    .shot{
+      display:block;
+      width:100%;
+      border-radius:22px;
+      filter:
+        drop-shadow(0 0 55px rgba(255,0,0,.2))
+        drop-shadow(0 10px 30px rgba(0,0,0,.65));
+      animation: float 6s ease-in-out infinite;
+      transition: transform .2s ease;
+    }
+    .shot:active{ transform: scale(1.02) }
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+    /* Glass box (English, tidy spacing) */
+    .features{
+      margin: 28px auto;
+      padding: 18px 18px;
+      background: var(--glass);
+      border: 1px solid var(--glass-bd);
+      border-radius: 14px;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      text-align: left;
+      direction: ltr;      /* English in the box */
+      max-width: 660px;
+    }
+    .li{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      font-size:14px;
+      line-height:1.55;
+      padding: 10px 2px;
+    }
+    .li + .li{ border-top:1px dashed rgba(255,255,255,.08) }
+    .dot{
+      width:10px; height:10px; border-radius:50%;
+      background: radial-gradient(circle,#ff5a5a,#c40000 70%);
+      box-shadow: 0 0 10px rgba(255,40,40,.55);
+      margin-top:6px; flex:0 0 auto;
+    }
+    .li .txt{ flex:1; }
+
+    /* CTA — red, glow, hover light, ripple */
+    .cta{
+      display:block;
+      width:100%;
+      max-width: 660px;
+      margin: 30px auto 16px;
+      padding: 16px 24px;
+      font-weight:900;
+      font-size:16px;
+      letter-spacing:.02em;
+      color:#fff;
+      text-decoration:none;
+      background: linear-gradient(180deg,#ff2323,#b80000);
+      border-radius:12px;
+      position:relative;
+      overflow:hidden;
+      box-shadow:
+        0 0 20px rgba(255,0,0,.35),
+        0 4px 25px rgba(255,0,0,.3),
+        inset 0 0 0 1px rgba(255,255,255,.08);
+      transition: transform .15s ease, box-shadow .25s ease, background .25s ease;
+    }
+    .cta:hover{
+      background: linear-gradient(180deg,#ff3d3d,#b50000);
+      transform: translateY(-1px);
+      box-shadow:
+        0 0 30px rgba(255,40,40,.55),
+        0 6px 30px rgba(255,0,0,.35);
+    }
+    .cta:active{
+      transform: scale(0.97);
+      box-shadow:
+        0 0 15px rgba(255,0,0,.45),
+        inset 0 0 12px rgba(0,0,0,.3);
+    }
+    .cta::after{
+      content:"";
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%) scale(0);
+      width:200%;
+      height:200%;
+      background:radial-gradient(circle,rgba(255,255,255,.25) 0%,transparent 80%);
+      opacity:0;
+      transition: transform .4s ease, opacity .6s ease;
+      pointer-events:none;
+    }
+    .cta:active::after{
+      transform:translate(-50%,-50%) scale(1);
+      opacity:1;
+    }
+
+    .hint{ font-size:12px; color:var(--muted); margin: 10px 0 18px; }
+    .foot{ font-size:11px; color:var(--muted); letter-spacing:.12em; text-transform:uppercase; margin-top:14px; }
+  
+  
+  /* زر حيّ فيه لمعان وحركة */
+.cta {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #ff2323, #b80000);
+  color: #fff;
+  font-weight: 900;
+  border-radius: 12px;
+  padding: 16px 24px;
+  text-decoration: none;
+  box-shadow: 0 0 25px rgba(255, 0, 0, .4);
+  transition: transform .15s ease, box-shadow .3s ease;
+}
+
+.cta::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.45) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-20deg);
+  animation: shine 4s infinite;
+}
+
+@keyframes shine {
+  0% { left: -75%; }
+  60% { left: 125%; }
+  100% { left: 125%; }
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 35px rgba(255,0,0,.6);
+}
+
+
+
+  
+  
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1 class="title">THE DISCIPLINE PACK</h1>
+    <h2 class="subline">
+      <span id="headerCounter" class="count">+0</span>
+      <span class="text">MOTIVATIONAL WALLPAPERS</span>
+    </h2>
+
+    <div class="shot-wrap">
+      <img class="shot" src="1.png" alt="FOCUS – Eagle Wallpaper">
+    </div>
+
+    <div class="features" aria-label="Features">
+      <div class="li"><span class="dot"></span><span class="txt">Crisp 4K wallpapers that fuel focus and discipline</span></div>
+      <div class="li"><span class="dot"></span><span class="txt">Responsive design — looks great on any screen</span></div>
+      <div class="li"><span class="dot"></span><span class="txt">Dark, elegant vibe that keeps you in the zone</span></div>
+    </div>
+
+    <a class="cta" href="https://samypop.nzmly.com/l/QQRVJhrrjW" target="_blank" rel="noopener">Buy Now</a>
+    <p class="hint">Use your active Gmail — the pack will be automatically delivered right after you complete your order</p>
+    <p class="hint">Instant download after purchase</p>
+    <p class="foot">AURA THRIVE</p>
+  </main>
+
+  <script>
+    // Header counter: count to +45 with pulse during counting, then settle
+    (function(){
+      const el = document.getElementById('headerCounter');
+      if(!el) return;
+      const target = 45;
+      const startVal = 0;
+      const dur = 1400;
+      const start = performance.now();
+      el.classList.add('counting');
+      function easeOutCubic(t){ return 1 - Math.pow(1 - t, 3); }
+      function tick(now){
+        const p = Math.min(1, (now - start) / dur);
+        const eased = easeOutCubic(p);
+        const val = Math.round(startVal + (target - startVal) * eased);
+        el.textContent = `+${val}`;
+        if(p < 1){
+          requestAnimationFrame(tick);
+        } else {
+          el.textContent = `+${target}`;
+          el.classList.remove('counting');
+        }
+      }
+      requestAnimationFrame(tick);
+    })();
+  </script>
+</body>
+</html>
